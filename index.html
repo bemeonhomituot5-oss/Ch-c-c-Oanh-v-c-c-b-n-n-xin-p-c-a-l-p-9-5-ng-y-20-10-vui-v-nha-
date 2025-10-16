@@ -1,77 +1,111 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chúc mừng 20/10 💐</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>💐 20/10 Vui Vẻ 💐</title>
   <style>
     body {
       margin: 0;
       height: 100vh;
-      background: linear-gradient(180deg, #ffb6c1, #ffcce6);
+      background: linear-gradient(180deg, #ffd1dc, #ffe6f2);
+      overflow: hidden;
       display: flex;
       justify-content: center;
       align-items: center;
-      overflow: hidden;
-      font-family: 'Comic Sans MS', cursive;
+      flex-direction: column;
+      font-family: 'Poppins', cursive;
+      color: #ff4d88;
+      text-align: center;
     }
 
     h1 {
-      color: white;
-      text-align: center;
-      font-size: 2.2em;
-      text-shadow: 2px 2px 5px #ff4d94;
+      font-size: 2.3em;
+      text-shadow: 0 0 10px rgba(255, 128, 171, 0.8);
       z-index: 10;
-      position: relative;
-      animation: fadeIn 3s ease-in-out;
+      animation: fadeIn 2.5s ease-out;
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(30px); }
+      from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
     .petal {
       position: absolute;
-      background: pink;
-      border-radius: 50%;
-      opacity: 0.8;
+      background: radial-gradient(circle at 30% 30%, #ffb6c1, #ff69b4);
+      border-radius: 70% 30% 70% 30%;
+      opacity: 0.9;
+      width: 18px;
+      height: 12px;
+      filter: blur(0.5px);
       animation: fall linear infinite;
     }
 
     @keyframes fall {
       0% {
-        transform: translateY(0) rotate(0deg);
+        transform: translateY(-10px) translateX(0) rotate(0deg);
         opacity: 1;
       }
       100% {
-        transform: translateY(110vh) rotate(360deg);
+        transform: translateY(110vh) translateX(40px) rotate(360deg);
         opacity: 0;
       }
+    }
+
+    /* hiệu ứng gió nhẹ */
+    .breeze {
+      animation: sway 4s ease-in-out infinite alternate;
+    }
+
+    @keyframes sway {
+      from { transform: translateX(0px) rotate(0deg); }
+      to { transform: translateX(40px) rotate(15deg); }
+    }
+
+    /* ánh sáng lấp lánh nền */
+    .sparkle {
+      position: absolute;
+      background: rgba(255,255,255,0.7);
+      border-radius: 50%;
+      pointer-events: none;
+      animation: twinkle 3s ease-in-out infinite;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0; transform: scale(0.5); }
+      50% { opacity: 1; transform: scale(1.2); }
     }
   </style>
 </head>
 <body>
-  <h1>🌸 Chúc cô Oanh đẹp gái và các gái xinh lớp 9/5<br>20/10 vui vẻ, đạt được mọi điều ước nha! 🌸</h1>
+  <h1>🌸 Chúc cô Oanh đẹp gái và<br>các gái xinh lớp 9/5<br>20/10 thật vui vẻ, đạt được mọi ước mơ nhoa! 🌸</h1>
 
   <script>
-    const numPetals = 25;
+    // tạo hoa rơi
+    const numPetals = 30;
     for (let i = 0; i < numPetals; i++) {
       let petal = document.createElement('div');
-      petal.classList.add('petal');
-      let size = Math.random() * 14 + 8 + 'px';
-      petal.style.width = size;
-      petal.style.height = size;
+      petal.classList.add('petal', 'breeze');
       petal.style.left = Math.random() * 100 + 'vw';
-      petal.style.animationDuration = Math.random() * 5 + 6 + 's';
-      petal.style.animationDelay = Math.random() * 5 + 's';
-      petal.style.background = `rgba(255, ${150 + Math.random() * 80}, ${200 + Math.random() * 55}, 0.9)`;
+      petal.style.animationDuration = (6 + Math.random() * 6) + 's';
+      petal.style.animationDelay = Math.random() * 4 + 's';
+      petal.style.width = (12 + Math.random() * 10) + 'px';
+      petal.style.height = (8 + Math.random() * 8) + 'px';
       document.body.appendChild(petal);
+    }
+
+    // tạo ánh sáng lấp lánh
+    const numSparkles = 25;
+    for (let i = 0; i < numSparkles; i++) {
+      let spark = document.createElement('div');
+      spark.classList.add('sparkle');
+      spark.style.width = spark.style.height = Math.random() * 5 + 'px';
+      spark.style.left = Math.random() * 100 + 'vw';
+      spark.style.top = Math.random() * 100 + 'vh';
+      spark.style.animationDelay = Math.random() * 5 + 's';
+      document.body.appendChild(spark);
     }
   </script>
 </body>
 </html>
-
