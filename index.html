@@ -1,36 +1,53 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>💐 20/10 Vui Vẻ 💐</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🌸 20/10 Vui Vẻ Nhaa 🌸</title>
   <style>
     body {
       margin: 0;
-      height: 100vh;
-      background: linear-gradient(180deg, #ffd1dc, #ffe6f2);
       overflow: hidden;
+      height: 100vh;
+      background: linear-gradient(180deg, #ffd6e8, #ffeaf4);
+      font-family: 'Dancing Script', cursive;
       display: flex;
       justify-content: center;
       align-items: center;
       flex-direction: column;
-      font-family: 'Poppins', cursive;
-      color: #ff4d88;
       text-align: center;
+      color: #ff4d88;
     }
 
     h1 {
-      font-size: 2.3em;
-      text-shadow: 0 0 10px rgba(255, 128, 171, 0.8);
-      z-index: 10;
-      animation: fadeIn 2.5s ease-out;
+      font-size: 28px;
+      max-width: 90%;
+      margin: 20px;
+      text-shadow: 0 0 10px rgba(255, 128, 171, 0.6);
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+    /* Hiệu ứng gõ chữ */
+    .typewriter {
+      display: inline-block;
+      overflow: hidden;
+      white-space: nowrap;
+      border-right: 3px solid #ff80ab;
+      font-size: 20px;
+      width: 0;
+      animation: typing 6s steps(60, end) forwards, blink 0.75s step-end infinite;
     }
 
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+
+    @keyframes blink {
+      from, to { border-color: transparent }
+      50% { border-color: #ff80ab; }
+    }
+
+    /* Hoa rơi */
     .petal {
       position: absolute;
       background: radial-gradient(circle at 30% 30%, #ffb6c1, #ff69b4);
@@ -38,32 +55,16 @@
       opacity: 0.9;
       width: 18px;
       height: 12px;
-      filter: blur(0.5px);
       animation: fall linear infinite;
+      filter: blur(0.5px);
     }
 
     @keyframes fall {
-      0% {
-        transform: translateY(-10px) translateX(0) rotate(0deg);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(110vh) translateX(40px) rotate(360deg);
-        opacity: 0;
-      }
+      0% { transform: translateY(-10px) translateX(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(110vh) translateX(40px) rotate(360deg); opacity: 0; }
     }
 
-    /* hiệu ứng gió nhẹ */
-    .breeze {
-      animation: sway 4s ease-in-out infinite alternate;
-    }
-
-    @keyframes sway {
-      from { transform: translateX(0px) rotate(0deg); }
-      to { transform: translateX(40px) rotate(15deg); }
-    }
-
-    /* ánh sáng lấp lánh nền */
+    /* Ánh sáng lung linh */
     .sparkle {
       position: absolute;
       background: rgba(255,255,255,0.7);
@@ -76,35 +77,61 @@
       0%, 100% { opacity: 0; transform: scale(0.5); }
       50% { opacity: 1; transform: scale(1.2); }
     }
+
+    /* Nhân vật chibi */
+    .chibi {
+      position: absolute;
+      bottom: 20px;
+      right: 30px;
+      width: 160px;
+      animation: float 3s ease-in-out infinite;
+      filter: drop-shadow(0 0 10px rgba(255, 150, 200, 0.7));
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    audio {
+      display: none;
+    }
   </style>
 </head>
 <body>
-  <h1>🌸 Chúc cô Oanh đẹp gái và<br>các gái xinh lớp 9/5<br>20/10 thật vui vẻ, đạt được mọi ước mơ nhoa! 🌸</h1>
+  <h1 class="typewriter">Chúc cô Oanh và những bông hoa xinh đẹp lớp 9/5 luôn rạng rỡ, hạnh phúc và đạt được mọi điều ước 20/10 này nhaa 💖</h1>
+
+  <img src="https://i.pinimg.com/originals/69/da/38/69da38c3e893dd35d96752cbe4193e6b.png" alt="Chibi boy" class="chibi">
+
+  <!-- Nhạc nền lofi chill -->
+  <audio autoplay loop>
+    <source src="https://cdn.pixabay.com/download/audio/2022/10/18/audio_1b8574e24b.mp3?filename=lofi-study-112191.mp3" type="audio/mpeg">
+  </audio>
 
   <script>
-    // tạo hoa rơi
+    // Hoa rơi
     const numPetals = 30;
     for (let i = 0; i < numPetals; i++) {
-      let petal = document.createElement('div');
-      petal.classList.add('petal', 'breeze');
+      const petal = document.createElement('div');
+      petal.classList.add('petal');
       petal.style.left = Math.random() * 100 + 'vw';
       petal.style.animationDuration = (6 + Math.random() * 6) + 's';
       petal.style.animationDelay = Math.random() * 4 + 's';
-      petal.style.width = (12 + Math.random() * 10) + 'px';
-      petal.style.height = (8 + Math.random() * 8) + 'px';
+      petal.style.width = (10 + Math.random() * 12) + 'px';
+      petal.style.height = (6 + Math.random() * 8) + 'px';
       document.body.appendChild(petal);
     }
 
-    // tạo ánh sáng lấp lánh
-    const numSparkles = 25;
+    // Ánh sáng lung linh
+    const numSparkles = 20;
     for (let i = 0; i < numSparkles; i++) {
-      let spark = document.createElement('div');
-      spark.classList.add('sparkle');
-      spark.style.width = spark.style.height = Math.random() * 5 + 'px';
-      spark.style.left = Math.random() * 100 + 'vw';
-      spark.style.top = Math.random() * 100 + 'vh';
-      spark.style.animationDelay = Math.random() * 5 + 's';
-      document.body.appendChild(spark);
+      const sparkle = document.createElement('div');
+      sparkle.classList.add('sparkle');
+      sparkle.style.width = sparkle.style.height = Math.random() * 5 + 'px';
+      sparkle.style.left = Math.random() * 100 + 'vw';
+      sparkle.style.top = Math.random() * 100 + 'vh';
+      sparkle.style.animationDelay = Math.random() * 5 + 's';
+      document.body.appendChild(sparkle);
     }
   </script>
 </body>
