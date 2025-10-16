@@ -7,11 +7,6 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
 
-    :root{
-      --fg: #ff4d88;
-      --accent: #ff80ab;
-    }
-
     body {
       margin: 0;
       overflow: hidden;
@@ -21,32 +16,30 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      flex-direction: column;
       text-align: center;
-      color: var(--fg);
-    }
-
-    /* tiêu đề (lên trên cùng) */
-    h1 {
-      font-size: 26px;
-      max-width: 85%;
-      margin: 30px;
-      text-shadow: 0 0 10px rgba(255, 128, 171, 0.5);
+      color: #ff4d88;
       position: relative;
-      z-index: 1000; /* quan trọng: chữ nằm trên cùng */
-      pointer-events: none;
-      line-height: 1.4;
     }
 
-    /* Hiệu ứng gõ chậm hơn */
+    /* Vùng chứa chữ */
+    .text-box {
+      position: relative;
+      z-index: 1000;
+      background: rgba(255,255,255,0.4);
+      border-radius: 20px;
+      padding: 30px 40px;
+      box-shadow: 0 0 25px rgba(255,150,200,0.4);
+    }
+
+    /* Chữ đánh máy */
     .typewriter {
       display: inline-block;
       overflow: hidden;
       white-space: nowrap;
-      border-right: 3px solid var(--accent);
-      font-size: 20px;
+      border-right: 3px solid #ff80ab;
+      font-size: 22px;
       width: 0;
-      animation: typing 10s steps(80, end) forwards, blink 0.75s step-end infinite;
+      animation: typing 8s steps(70, end) forwards, blink 0.75s step-end infinite;
     }
 
     @keyframes typing {
@@ -56,10 +49,10 @@
 
     @keyframes blink {
       from, to { border-color: transparent }
-      50% { border-color: var(--accent); }
+      50% { border-color: #ff80ab; }
     }
 
-    /* Hoa rơi (ở dưới chữ) */
+    /* Hoa rơi */
     .petal {
       position: absolute;
       background: radial-gradient(circle at 30% 30%, #ffb6c1, #ff69b4);
@@ -69,7 +62,7 @@
       height: 12px;
       animation: fall linear infinite;
       filter: blur(0.4px);
-      z-index: 50; /* thấp hơn chữ */
+      z-index: 100;
       pointer-events: none;
     }
 
@@ -78,46 +71,30 @@
       100% { transform: translateY(110vh) translateX(60px) rotate(360deg); opacity: 0; }
     }
 
-    /* Icon bay (trái tim + hoa + sao) */
+    /* Icon bay */
     .icon {
       position: absolute;
       font-size: 20px;
       opacity: 0.85;
       animation: floatIcon linear infinite;
-      z-index: 60; /* vẫn thấp hơn chữ */
+      z-index: 150;
       pointer-events: none;
       filter: drop-shadow(0 0 6px rgba(255,150,200,0.25));
     }
 
     @keyframes floatIcon {
-      0% { transform: translateY(-10px); opacity: 1; }
+      0% { transform: translateY(-20px); opacity: 1; }
       100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
     }
 
-    /* Nhân vật chibi gõ phím (lên trên chữ) */
-    .chibi {
-      position: absolute;
-      bottom: 10px;
-      right: 20px;
-      width: 180px;
-      animation: typingChibi 0.4s infinite alternate;
-      filter: drop-shadow(0 0 12px rgba(255, 150, 200, 0.7));
-      z-index: 1001; /* trên cùng hơn cả chữ */
-    }
-
-    @keyframes typingChibi {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(2px) rotate(1deg); }
-    }
-
-    /* Ánh sáng lung linh (nền, thấp hơn chữ) */
+    /* Ánh sáng lung linh */
     .sparkle {
       position: absolute;
       background: rgba(255,255,255,0.8);
       border-radius: 50%;
       pointer-events: none;
       animation: twinkle 3s ease-in-out infinite;
-      z-index: 40;
+      z-index: 50;
     }
 
     @keyframes twinkle {
@@ -129,22 +106,21 @@
   </style>
 </head>
 <body>
-  <!-- đặt heading với class typewriter -->
-  <h1 class="typewriter">
-    🌸 Chúc cô Oanh và những bông hoa xinh đẹp lớp 9/5 một ngày 20/10 thật rực rỡ, đáng yêu và luôn nở nụ cười nhaaa 💖✨
-  </h1>
+  <!-- khung chữ -->
+  <div class="text-box">
+    <h1 class="typewriter">
+      🌸 Chúc cô Oanh và những bông hoa xinh đẹp lớp 9/5 luôn rạng rỡ, hạnh phúc và đạt được mọi điều ước 20/10 này nhaa 💖✨
+    </h1>
+  </div>
 
-  <!-- Nhân vật chibi gõ phím (GIF/PNG) -->
-  <img src="https://i.pinimg.com/originals/d2/3a/6e/d23a6e47e7c62fc8f7dbbfcf27d65b2e.gif" alt="Chibi boy typing" class="chibi">
-
-  <!-- Nhạc nền chill -->
+  <!-- nhạc nền -->
   <audio autoplay loop>
     <source src="https://cdn.pixabay.com/download/audio/2022/10/18/audio_1b8574e24b.mp3?filename=lofi-study-112191.mp3" type="audio/mpeg">
   </audio>
 
   <script>
-    // Hoa rơi (nhiều kích thước + rơi nhẹ)
-    const numPetals = 45;
+    // tạo hoa rơi
+    const numPetals = 40;
     for (let i = 0; i < numPetals; i++) {
       const petal = document.createElement('div');
       petal.classList.add('petal');
@@ -153,28 +129,27 @@
       petal.style.animationDelay = Math.random() * 5 + 's';
       petal.style.width = (8 + Math.random() * 24) + 'px';
       petal.style.height = (5 + Math.random() * 14) + 'px';
-      // random rotate start and gentle sway using transform
       petal.style.transform = `rotate(${Math.random()*360}deg)`;
       petal.style.opacity = 0.7 + Math.random() * 0.25;
       document.body.appendChild(petal);
     }
 
-    // Icon bay (trái tim + hoa + sao) - phía dưới chữ (z-index thấp)
-    const icons = ['🌸', '💖', '✨', '🌷', '💞', '⭐'];
-    for (let i = 0; i < 28; i++) {
+    // icon bay — chỉ bay cao hơn chữ
+    const icons = ['🌸','💖','✨','🌷','💞','⭐'];
+    for (let i = 0; i < 30; i++) {
       const icon = document.createElement('div');
       icon.classList.add('icon');
       icon.innerText = icons[Math.floor(Math.random() * icons.length)];
       icon.style.left = Math.random() * 100 + 'vw';
       icon.style.animationDuration = (8 + Math.random() * 6) + 's';
       icon.style.animationDelay = Math.random() * 6 + 's';
-      icon.style.fontSize = (14 + Math.random() * 16) + 'px';
-      icon.style.opacity = 0.6 + Math.random() * 0.4;
+      icon.style.fontSize = (16 + Math.random() * 18) + 'px';
+      icon.style.top = Math.random() * 20 + 'vh'; // chỉ ở phía trên cao
       document.body.appendChild(icon);
     }
 
-    // Ánh sáng lung linh (nền)
-    const numSparkles = 22;
+    // ánh sáng lung linh
+    const numSparkles = 25;
     for (let i = 0; i < numSparkles; i++) {
       const sparkle = document.createElement('div');
       sparkle.classList.add('sparkle');
