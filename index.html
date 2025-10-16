@@ -39,8 +39,9 @@
       border-right: 3px solid #ff80ab;
       font-size: 18px;
       width: 100%;
-      animation: typing 8s steps(70, end) forwards, blink 0.75s step-end infinite;
       word-wrap: break-word;
+      animation: typing 8s steps(70, end) forwards, blink 0.75s step-end infinite;
+      animation-play-state: paused; /* tạm dừng animation trước */
     }
 
     @keyframes typing {
@@ -132,12 +133,19 @@
   </audio>
 
   <script>
+    // Bật nhạc khi click
     const music = document.getElementById('bgMusic');
     document.body.addEventListener('click', function playOnce() {
       music.play();
       document.body.removeEventListener('click', playOnce);
     });
 
+    // Chờ font load xong mới chạy chữ đánh máy
+    document.fonts.ready.then(() => {
+      document.querySelector('.typewriter').style.animationPlayState = 'running';
+    });
+
+    // Hoa rơi
     const numPetals = 25;
     for (let i = 0; i < numPetals; i++) {
       const petal = document.createElement('div');
@@ -152,6 +160,7 @@
       document.body.appendChild(petal);
     }
 
+    // Icon bay
     const icons = ['🌸','💖','✨','🌷','💞','⭐'];
     for (let i = 0; i < 15; i++) {
       const icon = document.createElement('div');
@@ -165,6 +174,7 @@
       document.body.appendChild(icon);
     }
 
+    // Ánh sáng lung linh
     const numSparkles = 15;
     for (let i = 0; i < numSparkles; i++) {
       const sparkle = document.createElement('div');
@@ -179,5 +189,4 @@
   </script>
 </body>
 </html>
-
 
