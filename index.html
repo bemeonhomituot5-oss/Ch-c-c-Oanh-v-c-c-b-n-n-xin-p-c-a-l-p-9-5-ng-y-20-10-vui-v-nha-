@@ -1,83 +1,47 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🌸 20/10 Vui Vẻ Nhaa 🌸</title>
+  <title>Chúc mừng 20/10 💐</title>
   <style>
     body {
-      background-color: #ffc8dd;
-      color: #4a4a4a;
-      font-family: 'Comic Sans MS', cursive;
-      text-align: center;
-      padding-top: 100px;
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(180deg, #ffb6c1, #ffcce6);
+      display: flex;
+      justify-content: center;
+      align-items: center;
       overflow: hidden;
+      font-family: 'Comic Sans MS', cursive;
     }
+
     h1 {
-      font-size: 26px;
-      margin-top: 20px;
-      animation: fadeIn 2s ease-in-out;
-    }
-    .flower {
+      color: white;
+      text-align: center;
+      font-size: 2.2em;
+      text-shadow: 2px 2px 5px #ff4d94;
+      z-index: 10;
       position: relative;
-      width: 120px;
-      height: 120px;
-      margin: 0 auto;
-      animation: bloom 2s ease-in-out forwards;
-    }
-    .petal {
-      position: absolute;
-      width: 60px;
-      height: 60px;
-      background: #ff69b4;
-      border-radius: 50%;
-      top: 30px;
-      left: 30px;
-      transform-origin: bottom right;
-    }
-    .petal:nth-child(1) { transform: rotate(0deg) translate(40px); }
-    .petal:nth-child(2) { transform: rotate(72deg) translate(40px); }
-    .petal:nth-child(3) { transform: rotate(144deg) translate(40px); }
-    .petal:nth-child(4) { transform: rotate(216deg) translate(40px); }
-    .petal:nth-child(5) { transform: rotate(288deg) translate(40px); }
-    .center {
-      position: absolute;
-      width: 50px;
-      height: 50px;
-      background: yellow;
-      border-radius: 50%;
-      top: 35px;
-      left: 35px;
-      box-shadow: 0 0 20px rgba(255,255,0,0.8);
-    }
-    @keyframes bloom {
-      0% { transform: scale(0); opacity: 0; }
-      100% { transform: scale(1); opacity: 1; }
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    .message {
-      font-size: 20px;
-      max-width: 500px;
-      margin: 20px auto;
       animation: fadeIn 3s ease-in-out;
     }
-    .extra {
-      font-size: 20px;
-      font-weight: bold;
-      color: #ff1493;
-      animation: fadeIn 4s ease-in-out;
-      margin-top: 30px;
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
     }
-    /* Hoa rơi */
-    .falling-flower {
-      position: fixed;
-      top: -50px;
-      font-size: 24px;
+
+    .petal {
+      position: absolute;
+      background: pink;
+      border-radius: 50%;
+      opacity: 0.8;
       animation: fall linear infinite;
     }
+
     @keyframes fall {
       0% {
         transform: translateY(0) rotate(0deg);
@@ -91,47 +55,23 @@
   </style>
 </head>
 <body>
-  <div class="flower">
-    <div class="petal"></div>
-    <div class="petal"></div>
-    <div class="petal"></div>
-    <div class="petal"></div>
-    <div class="petal"></div>
-    <div class="center"></div>
-  </div>
-  <h1>💖 Chúc mừng 20/10 💖</h1>
-  <p class="message">Chúc cô Oanh đẹp gái và các gái xinh lớp 9/5 ngày 20/10 vui vẻ, mọi điều ước, nguyện vọng trong tương lai, mục tiêu bạn hướng tới sẽ đạt được xuất sắc nhaa! 🌸</p>
+  <h1>🌸 Chúc cô Oanh đẹp gái và các gái xinh lớp 9/5<br>20/10 vui vẻ, đạt được mọi điều ước nha! 🌸</h1>
 
   <script>
-    // Lấp lánh
-    for (let i = 0; i < 30; i++) {
-      const sparkle = document.createElement('div');
-      sparkle.classList.add('sparkle');
-      sparkle.style.position = 'absolute';
-      sparkle.style.width = '6px';
-      sparkle.style.height = '6px';
-      sparkle.style.background = 'white';
-      sparkle.style.borderRadius = '50%';
-      sparkle.style.top = Math.random() * 100 + 'vh';
-      sparkle.style.left = Math.random() * 100 + 'vw';
-      sparkle.style.animation = 'sparkle 3s infinite ease-in-out';
-      sparkle.style.animationDelay = Math.random() * 3 + 's';
-      document.body.appendChild(sparkle);
+    const numPetals = 25;
+    for (let i = 0; i < numPetals; i++) {
+      let petal = document.createElement('div');
+      petal.classList.add('petal');
+      let size = Math.random() * 14 + 8 + 'px';
+      petal.style.width = size;
+      petal.style.height = size;
+      petal.style.left = Math.random() * 100 + 'vw';
+      petal.style.animationDuration = Math.random() * 5 + 6 + 's';
+      petal.style.animationDelay = Math.random() * 5 + 's';
+      petal.style.background = `rgba(255, ${150 + Math.random() * 80}, ${200 + Math.random() * 55}, 0.9)`;
+      document.body.appendChild(petal);
     }
-
-    // Hoa rơi
-    const flowers = ["🌸","🌷","💮","🌺","🌹"];
-    function createFlower() {
-      const flower = document.createElement('div');
-      flower.classList.add('falling-flower');
-      flower.textContent = flowers[Math.floor(Math.random() * flowers.length)];
-      flower.style.left = Math.random() * 100 + 'vw';
-      flower.style.animationDuration = (Math.random() * 5 + 5) + 's';
-      flower.style.fontSize = (Math.random() * 10 + 16) + 'px';
-      document.body.appendChild(flower);
-      setTimeout(() => flower.remove(), 10000);
-    }
-    setInterval(createFlower, 300);
   </script>
 </body>
 </html>
+
