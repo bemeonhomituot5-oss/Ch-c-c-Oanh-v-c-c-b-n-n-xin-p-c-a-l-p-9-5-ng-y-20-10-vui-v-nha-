@@ -183,4 +183,19 @@
   <source src="https://cdn.pixabay.com/download/audio/2022/10/18/audio_1b8574e24b.mp3?filename=lofi-study-112191.mp3" type="audio/mpeg">
 </audio>
 
+<audio id="bgMusic" loop>
+  <source src="https://cdn.pixabay.com/download/audio/2022/10/18/audio_1b8574e24b.mp3?filename=lofi-study-112191.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+  const music = document.getElementById('bgMusic');
+
+  // bật nhạc khi bấm vào bất kỳ đâu trên trang
+  document.body.addEventListener('click', function playOnce() {
+    music.play();
+    document.body.removeEventListener('click', playOnce); // chỉ cần 1 lần
+  });
+</script>
+
+
 
