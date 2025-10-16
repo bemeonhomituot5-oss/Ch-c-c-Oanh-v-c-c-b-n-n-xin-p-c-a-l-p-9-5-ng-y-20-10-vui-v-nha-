@@ -30,28 +30,15 @@
       padding: 20px;
       box-shadow: 0 0 15px rgba(255,150,200,0.4);
       max-width: 90%;
+      overflow-wrap: break-word;
     }
 
     .typewriter {
       display: inline-block;
-      overflow: hidden;
       white-space: normal; /* cho chữ xuống dòng */
-      border-right: 3px solid #ff80ab;
       font-size: 18px;
-      width: 100%;
-      word-wrap: break-word;
-      animation: typing 8s steps(70, end) forwards, blink 0.75s step-end infinite;
-      animation-play-state: paused; /* tạm dừng animation trước */
-    }
-
-    @keyframes typing {
-      from { width: 0 }
-      to { width: 100% }
-    }
-
-    @keyframes blink {
-      from, to { border-color: transparent }
-      50% { border-color: #ff80ab; }
+      border-right: 3px solid #ff80ab;
+      min-height: 1em;
     }
 
     .petal {
@@ -121,9 +108,7 @@
 </head>
 <body>
   <div class="text-box">
-    <h1 class="typewriter">
-      🌸 Chúc cô Oanh và những bông hoa xinh đẹp lớp 9/5 luôn rạng rỡ, hạnh phúc và đạt được mọi điều ước 20/10 này nhaa 💖✨
-    </h1>
+    <h1 class="typewriter"></h1>
   </div>
 
   <p class="madeby">Made by the boys of class 9/5</p>
@@ -133,17 +118,26 @@
   </audio>
 
   <script>
-    // Bật nhạc khi click
     const music = document.getElementById('bgMusic');
+
+    // Bật nhạc khi click
     document.body.addEventListener('click', function playOnce() {
       music.play();
       document.body.removeEventListener('click', playOnce);
     });
 
-    // Chờ font load xong mới chạy chữ đánh máy
-    document.fonts.ready.then(() => {
-      document.querySelector('.typewriter').style.animationPlayState = 'running';
-    });
+    // Chữ đánh máy bằng JS
+    const text = "🌸 Chúc cô Oanh và những bông hoa xinh đẹp lớp 9/5 luôn rạng rỡ, hạnh phúc và đạt được mọi điều ước 20/10 này nhaa 💖✨";
+    const h1 = document.querySelector('.typewriter');
+    let i = 0;
+    function type() {
+      if (i < text.length) {
+        h1.textContent += text[i];
+        i++;
+        setTimeout(type, 60); // tốc độ gõ chữ
+      }
+    }
+    document.fonts.ready.then(() => { type(); });
 
     // Hoa rơi
     const numPetals = 25;
