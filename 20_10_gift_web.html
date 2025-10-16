@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tặng 20/10 — Thiệp Web</title>
+  <style>
+    :root{--bg1:#ffefef;--bg2:#fff7f0;--accent:#ff6b9a;--accent2:#ffb199}
+    *{box-sizing:border-box;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial}
+    html,body{height:100%;margin:0;background:linear-gradient(135deg,var(--bg1),var(--bg2));}
+    .wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:32px}
+    .card{width:100%;max-width:960px;background:linear-gradient(180deg,rgba(255,255,255,0.9),rgba(255,255,255,0.85));border-radius:18px;box-shadow:0 10px 30px rgba(0,0,0,0.08);padding:36px;position:relative;overflow:hidden}
+    h1{margin:0;font-size:36px;color:var(--accent);letter-spacing:0.5px}
+    p.lead{margin:8px 0 18px;color:#444}
+    .hero{display:flex;gap:28px;align-items:center}
+    .left{flex:1}
+    .right{width:320px;display:flex;flex-direction:column;gap:12px}
+    .flower{width:120px;height:120px;border-radius:50%;background:radial-gradient(circle at 30% 30%, #fff, #ffd7e3 40%, #ff9fb6 100%);display:flex;align-items:center;justify-content:center;font-weight:700;color:#b33}
+
+    .controls{display:flex;gap:8px;flex-wrap:wrap}
+    input[type=text]{padding:10px 12px;border-radius:10px;border:1px solid #eee;min-width:200px}
+    button{padding:10px 14px;border-radius:10px;border:0;background:linear-gradient(90deg,var(--accent),var(--accent2));color:white;font-weight:600;cursor:pointer}
+    .message{margin-top:18px;padding:18px;border-radius:12px;background:linear-gradient(180deg,#fff0f2,#fff6f6);border:1px dashed rgba(255,107,154,0.2);min-height:98px;display:flex;align-items:center;justify-content:center;font-size:18px}
+    .footer{margin-top:18px;color:#666;font-size:13px}
+
+    /* floating hearts */
+    .hearts{position:absolute;inset:0;pointer-events:none}
+    @keyframes floaty{0%{transform:translateY(120%) scale(0.8) rotate(0deg);opacity:0}50%{opacity:1}100%{transform:translateY(-30%) scale(1) rotate(12deg);opacity:0}}
+    .heart{position:absolute;width:28px;height:28px;background:var(--accent);clip-path:path('M10 30 C 10 10, 50 10, 50 30 C 50 50, 30 68, 25 80 C 20 68, 0 50, 0 30 C 0 10, 40 10, 40 30 Z');opacity:0.95}
+    /* responsive */
+    @media (max-width:720px){.hero{flex-direction:column}.right{width:100%}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <div class="hearts" id="hearts"></div>
+      <div class="hero">
+        <div class="left">
+          <h1>Chúc mừng 20/10</h1>
+          <p class="lead">Gửi tặng người con gái đặc biệt — chỉnh tên & nhấn "Tạo" để xem thiệp.</p>
+
+          <div class="controls">
+            <input id="nameInput" type="text" placeholder="Ghi tên người nhận (ví dụ: Mẹ yêu)..." />
+            <button id="createBtn">Tạo thiệp</button>
+            <button id="confettiBtn">Bắn confetti</button>
+            <button id="downloadBtn">Tải ảnh</button>
+          </div>
+
+          <div class="message" id="message">Nhấn "Tạo thiệp" để xem lời chúc nha 💌</div>
+
+          <div class="footer">Bạn có thể in hoặc gửi file HTML này cho người ấy. Chỉnh nội dung thoải mái nha!</div>
+        </div>
+
+        <div class="right">
+          <div class="flower">20/10</div>
+          <div style="font-size:14px;color:#555">Gợi ý lời chúc:</div>
+          <div style="background:#fff;padding:12px;border-radius:10px;border:1px solid #ffdfe8;color:#333">
+            Chúc bạn luôn xinh, hạnh phúc và thành công. Cám ơn vì đã luôn yêu thương và che chở.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // simple confetti hearts
+    const heartsEl = document.getElementById('hearts');
+    function shootHearts(n=20){
+      for(let i=0;i<n;i++){
+        const h = document.createElement('div');
+        h.className='heart';
+        h.style.left = Math.random()*100 + '%';
+        h.style.bottom = '-10%';
+        h.style.opacity = Math.random()*0.8+0.2;
+        const size = 14 + Math.random()*36;
+        h.style.width = size+'px'; h.style.height = size+'px';
+        h.style.transform = `translateY(0) rotate(${Math.random()*60-30}deg)`;
+        heartsEl.appendChild(h);
+        const dur = 3500 + Math.random()*2500;
+        h.animate([
+          {transform: `translateY(0) scale(0.6) rotate(0deg)`, opacity:0},
+          {transform: `translateY(-120vh) scale(1) rotate(${Math.random()*360}deg)`, opacity:1}
+        ],{duration:dur, easing:'cubic-bezier(.17,.67,.14,1)', iterations:1});
+        setTimeout(()=>h.remove(), dur+50);
+      }
+    }
+
+    document.getElementById('confettiBtn').addEventListener('click', ()=>shootHearts(30));
+
+    // create message
+    const defaultMsg = "Chúc mừng ngày Phụ nữ Việt Nam 20/10! Chúc bạn luôn xinh đẹp, mạnh mẽ và tràn đầy yêu thương ❤️";
+    document.getElementById('createBtn').addEventListener('click', ()=>{
+      const name = document.getElementById('nameInput').value.trim();
+      const target = document.getElementById('message');
+      if(name) target.innerHTML = `<strong>Gửi ${escapeHtml(name)}:</strong><br>${defaultMsg}`;
+      else target.innerHTML = defaultMsg;
+      shootHearts(18);
+    });
+
+    // download as image (uses html2canvas-free tiny implementation)
+    async function downloadCard(){
+      // draw the card area
+      const card = document.querySelector('.card');
+      const rect = card.getBoundingClientRect();
+      const clone = card.cloneNode(true);
+      // inline styles for accurate rendering
+      clone.style.boxShadow='none'; clone.style.transform='none';
+      const wrap = document.createElement('div'); wrap.style.padding='20px'; wrap.style.background='white'; wrap.appendChild(clone);
+      // use SVG foreignObject trick
+      const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='${rect.width}' height='${rect.height}'><foreignObject width='100%' height='100%'>${new XMLSerializer().serializeToString(clone)}</foreignObject></svg>`;
+      const blob = new Blob([svg],{type:'image/svg+xml;charset=utf-8'});
+      const url = URL.createObjectURL(blob);
+      const img = new Image();
+      img.onload = ()=>{
+        const canvas = document.createElement('canvas'); canvas.width = rect.width*2; canvas.height = rect.height*2;
+        const ctx = canvas.getContext('2d'); ctx.scale(2,2);
+        ctx.fillStyle='#fff'; ctx.fillRect(0,0,rect.width,rect.height);
+        ctx.drawImage(img,0,0);
+        URL.revokeObjectURL(url);
+        const link = document.createElement('a'); link.download = '20-10-card.png'; link.href = canvas.toDataURL('image/png'); link.click();
+      };
+      img.onerror = ()=>{alert('Không thể tạo ảnh tự động trên một số trình duyệt. Hãy chụp màn hình thay thế.');}
+      img.src = url;
+    }
+    document.getElementById('downloadBtn').addEventListener('click', downloadCard);
+
+    // tiny helper
+    function escapeHtml(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+  </script>
+</body>
+</html>
