@@ -14,7 +14,7 @@
       overflow: hidden;
     }
     h1 {
-      font-size: 24px;
+      font-size: 26px;
       margin-top: 20px;
       animation: fadeIn 2s ease-in-out;
     }
@@ -64,17 +64,29 @@
       margin: 20px auto;
       animation: fadeIn 3s ease-in-out;
     }
-    .sparkle {
-      position: absolute;
-      width: 6px;
-      height: 6px;
-      background: white;
-      border-radius: 50%;
-      animation: sparkle 3s infinite ease-in-out;
+    .extra {
+      font-size: 20px;
+      font-weight: bold;
+      color: #ff1493;
+      animation: fadeIn 4s ease-in-out;
+      margin-top: 30px;
     }
-    @keyframes sparkle {
-      0%, 100% { transform: scale(0.5); opacity: 0.2; }
-      50% { transform: scale(1.2); opacity: 1; }
+    /* Hoa rơi */
+    .falling-flower {
+      position: fixed;
+      top: -50px;
+      font-size: 24px;
+      animation: fall linear infinite;
+    }
+    @keyframes fall {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+      }
     }
   </style>
 </head>
@@ -88,17 +100,39 @@
     <div class="center"></div>
   </div>
   <h1>💖 Chúc mừng 20/10 💖</h1>
-  <p class="message">Chúc cô Oanh xinh đẹp và các gái xinh lớp 9/5 ngày 20/10 vui vẻ, mọi điều ước, nguyện vọng trong tương lai, mục tiêu mà mình hướng tới sẽ đạt được xuất sắc nhaa! 🌸</p>
+  <p class="message">Chúc cô Oanh đẹp gái và các gái xinh lớp 9/5 ngày 20/10 vui vẻ, mọi điều ước, nguyện vọng trong tương lai, mục tiêu bạn hướng tới sẽ đạt được xuất sắc nhaa! 🌸</p>
+  <p class="extra">Và bây giờ, các bạn hãy ra hành lang và nhìn xuống bên dưới xem thứ gì đang chờ đón các bạn nhé! 🎁</p>
+
   <script>
-    // Tạo hiệu ứng lấp lánh
+    // Lấp lánh
     for (let i = 0; i < 30; i++) {
       const sparkle = document.createElement('div');
       sparkle.classList.add('sparkle');
+      sparkle.style.position = 'absolute';
+      sparkle.style.width = '6px';
+      sparkle.style.height = '6px';
+      sparkle.style.background = 'white';
+      sparkle.style.borderRadius = '50%';
       sparkle.style.top = Math.random() * 100 + 'vh';
       sparkle.style.left = Math.random() * 100 + 'vw';
+      sparkle.style.animation = 'sparkle 3s infinite ease-in-out';
       sparkle.style.animationDelay = Math.random() * 3 + 's';
       document.body.appendChild(sparkle);
     }
+
+    // Hoa rơi
+    const flowers = ["🌸","🌷","💮","🌺","🌹"];
+    function createFlower() {
+      const flower = document.createElement('div');
+      flower.classList.add('falling-flower');
+      flower.textContent = flowers[Math.floor(Math.random() * flowers.length)];
+      flower.style.left = Math.random() * 100 + 'vw';
+      flower.style.animationDuration = (Math.random() * 5 + 5) + 's';
+      flower.style.fontSize = (Math.random() * 10 + 16) + 'px';
+      document.body.appendChild(flower);
+      setTimeout(() => flower.remove(), 10000);
+    }
+    setInterval(createFlower, 300);
   </script>
 </body>
 </html>
