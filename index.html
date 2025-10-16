@@ -75,7 +75,7 @@
     .icon {
       position: absolute;
       font-size: 20px;
-      opacity: 0.85;
+      opacity: 0; /* bắt đầu ẩn */
       animation: floatIcon linear infinite;
       z-index: 150;
       pointer-events: none;
@@ -83,8 +83,9 @@
     }
 
     @keyframes floatIcon {
-      0% { transform: translateY(-20px); opacity: 1; }
-      100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+      0% { transform: translateY(-50px); opacity: 0; } /* bắt đầu trên cùng */
+      10% { opacity: 1; } /* từ từ hiện ra */
+      100% { transform: translateY(110vh) rotate(360deg); opacity: 0; } /* rơi xuống và mờ dần */
     }
 
     /* Ánh sáng lung linh */
@@ -134,7 +135,7 @@
       document.body.appendChild(petal);
     }
 
-    // icon bay — chỉ bay cao hơn chữ
+    // icon bay — bắt đầu ẩn trên cùng
     const icons = ['🌸','💖','✨','🌷','💞','⭐'];
     for (let i = 0; i < 30; i++) {
       const icon = document.createElement('div');
@@ -144,7 +145,7 @@
       icon.style.animationDuration = (8 + Math.random() * 6) + 's';
       icon.style.animationDelay = Math.random() * 6 + 's';
       icon.style.fontSize = (16 + Math.random() * 18) + 'px';
-      icon.style.top = Math.random() * 20 + 'vh'; // chỉ ở phía trên cao
+      icon.style.top = '0vh'; // bắt đầu trên cùng
       document.body.appendChild(icon);
     }
 
